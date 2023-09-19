@@ -15,7 +15,7 @@ REMOVES += $(DSK)
 .PHONY: dsk
 dsk: $(DSK)
 
-$(DSK): $(NAME).apple2
+$(DSK): $(NAME).apple2enh
 	$(call CP, apple2/template.dsk $@)
-	java -jar $(AC) -p  $@ $(NAME).system sys < $(shell cl65 --print-target-path)/apple2/util/loader.system
-	java -jar $(AC) -as $@ $(NAME)        bin < $(NAME).apple2
+	java -jar $(AC) -p  $@ $(NAME).system sys < $(shell cl65 --print-target-path)/apple2enh/util/loader.system
+	java -jar $(AC) -as $@ $(NAME)        bin < $(NAME).apple2enh

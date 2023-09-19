@@ -9,11 +9,11 @@
 
 # Space or comma separated list of cc65 supported target platforms to build for.
 # Default: c64 (lowercase!)
-TARGETS := apple2
+TARGETS := apple2enh
 
 # Name of the final, single-file executable.
 # Default: name of the current dir with target name appended
-PROGRAM :=
+PROGRAM := a2term
 
 # Path(s) to additional libraries required for linking the program
 # Use only if you don't want to place copies of the libraries in SRCDIR
@@ -27,7 +27,7 @@ CONFIG  :=
 
 # Additional C compiler flags and options.
 # Default: none
-CFLAGS  =
+CFLAGS  = -Os -DBUILD_APPLE2
 
 # Additional assembler flags and options.
 # Default: none
@@ -35,7 +35,7 @@ ASFLAGS =
 
 # Additional linker flags and options.
 # Default: none
-LDFLAGS =
+LDFLAGS = $(LDFLAGS.$(TARGETS))
 
 ifeq ($(PROGRAM),)
 	NAME := $(notdir $(CURDIR))
