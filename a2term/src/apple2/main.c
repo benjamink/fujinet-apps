@@ -1,6 +1,7 @@
-#include <apple2enh.h>
 #include <conio.h>
 #include <string.h>
+
+#define SLOTS 20
 
 unsigned char SCRW, SCRH;
 
@@ -42,12 +43,29 @@ void border(int x, int y, int width, int height, int fill)
   revers(0);
 }
 
+void draw_name_spaces(void)
+{
+  int l;
+  int c;
+
+  for (l = 4; l <= SLOTS; ++l)
+  {
+    for (c = 2; c <= (SCRW / 2) - 3; ++c)
+      cputsxy(c, l, "_");
+    // chlinexy(2, l, (SCRW / 2) - 4);
+    for (c = (SCRW / 2) + 1; c <= SCRW - 3; ++c)
+      cputsxy(c, l, "_");
+    // chlinexy((SCRW / 2) + 1, l, (SCRW / 2) - 3);
+  }
+}
+
 void draw_background(void)
 {
   clrscr();
   border(0, 0, SCRW, 2, 1);
   border(0, 1, SCRW, SCRH, 0);
   border(0, 1, (SCRW / 2), SCRH, 0);
+  draw_name_spaces();
 }
 
 void draw_headings(void)
@@ -97,13 +115,14 @@ void draw_footer(void)
 
 void main(void)
 {
-  videomode(VIDEOMODE_80x24);
-
   screensize(&SCRW, &SCRH);
 
   draw_background();
   draw_headings();
   draw_footer();
+
+  gotoxy(2, 4);
+  cursor(1);
 
   cgetc();
 }
